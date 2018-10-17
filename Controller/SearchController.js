@@ -388,7 +388,8 @@ module.exports = {
 
         function getCountryBasedAI (){
 
-            CountryBasedAI.findOne({CountryBasedAI_Country_ID: Number(req.body.country_id)})
+            CountryBasedAI.findOne({  $and:[ {'CountryBasedAI_Country_ID':Number(req.body.country_id), 
+				{'CountryBasedAI_AI_Code':Number(req.body.AI_Code)} ]})
          	.lean()
 			.exec(function(err, countrybasedai){
                  if (err){
@@ -441,13 +442,15 @@ module.exports = {
                  AllData.push({AIData:ai});
                  getCountryBasedAI();
                  getCountryBasedTN();
+                 getAllTN();
                  getTN();
              }
         })
 
         function getCountryBasedAI (){
-
-            CountryBasedAI.findOne({CountryBasedAI_Country_ID: Number(req.body.country_id)},function(err, countrybasedai){
+        	 
+            CountryBasedAI.findOne({ $and:[ {'CountryBasedAI_Country_ID':Number(req.body.country_id), 
+				{'CountryBasedAI_AI_Code':Number(search)}]},function(err, countrybasedai){
                  if (err){
                      res.send({
                          message: err
@@ -457,10 +460,11 @@ module.exports = {
                  }
             })
         }
-
+     
         function getCountryBasedTN (){
 
-            CountryBasedTN.findOne({CountryBasedTN_Country_ID: Number(req.body.country_id)})
+            CountryBasedTN.findOne({$and:[ {'CountryBasedTN_Country_ID':Number(req.body.country_id), 
+				{'CountryBasedTN_TN_Code':Number(req.body.TN_Code)} ]})
             .lean()
 			.exec(function(err, countrybasedtn){
                  if (err){
@@ -468,14 +472,29 @@ module.exports = {
                          message: err
                      });
                  } else {
-                     AllData.push({CountryBasedAIData:countrybasedtn});
+                     AllData.push({CountryBasedTNData:countrybasedtn});
                  }
             })
         }
 
         function getTN(){
              TN.find({TN_Code:req.body.TN_Code})
-                // .select('TN_Code TN_Name')
+                .lean()
+                .exec(function(err, tn) {
+                 if (err){
+                     return res.send({
+                         message: err
+                     });
+                 } else {
+                     AllData.push({TNData:tn});
+                     // res.send(AllData);
+                 }
+             })
+        }
+
+        function getAllTN(){
+             TN.find({TN_ActiveIngredients:number(search)})
+                .select('TN_Code TN_Name')
                 .lean()
                 .exec(function(err, tn) {
                  if (err){
@@ -494,7 +513,6 @@ module.exports = {
                  }
              })
         }
-
 
     },
 
