@@ -458,7 +458,9 @@ module.exports = {
 
         function getCountryBasedTN (){
 
-            CountryBasedTN.findOne({CountryBasedTN_Country_ID: Number(req.body.country_id)},function(err, countrybasedtn){
+            CountryBasedTN.findOne({CountryBasedTN_Country_ID: Number(req.body.country_id)})
+            .lean()
+			.exec(function(err, countrybasedtn){
                  if (err){
                      res.send({
                          message: err
