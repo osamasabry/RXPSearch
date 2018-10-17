@@ -508,7 +508,7 @@ module.exports = {
                              value: tn[i].TN_Name,
                          });
                      }
-                     AllData.push({TNData:getTNData});
+                     AllData.push({AllTNData:getTNData});
                      res.send(AllData);
                  }
              })
