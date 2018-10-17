@@ -493,7 +493,7 @@ module.exports = {
         }
 
         function getAllTN(){
-             TN.find({TN_ActiveIngredients:number(search)})
+             TN.find({TN_ActiveIngredients:Number(search)})
                 .select('TN_Code TN_Name')
                 .lean()
                 .exec(function(err, tn) {
