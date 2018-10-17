@@ -389,7 +389,7 @@ module.exports = {
         function getCountryBasedAI (){
 
             CountryBasedAI.findOne({  $and:[ {'CountryBasedAI_Country_ID':Number(req.body.country_id), 
-				{'CountryBasedAI_AI_Code':Number(req.body.AI_Code)} ]})
+				'CountryBasedAI_AI_Code':Number(req.body.AI_Code)} ]})
          	.lean()
 			.exec(function(err, countrybasedai){
                  if (err){
@@ -450,7 +450,7 @@ module.exports = {
         function getCountryBasedAI (){
         	 
             CountryBasedAI.findOne({ $and:[ {'CountryBasedAI_Country_ID':Number(req.body.country_id), 
-				{'CountryBasedAI_AI_Code':Number(search)}]},function(err, countrybasedai){
+				'CountryBasedAI_AI_Code':Number(search)}]},function(err, countrybasedai){
                  if (err){
                      res.send({
                          message: err
@@ -464,7 +464,7 @@ module.exports = {
         function getCountryBasedTN (){
 
             CountryBasedTN.findOne({$and:[ {'CountryBasedTN_Country_ID':Number(req.body.country_id), 
-				{'CountryBasedTN_TN_Code':Number(req.body.TN_Code)} ]})
+				'CountryBasedTN_TN_Code':Number(req.body.TN_Code)} ]})
             .lean()
 			.exec(function(err, countrybasedtn){
                  if (err){
