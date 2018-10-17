@@ -388,7 +388,7 @@ module.exports = {
 
         function getCountryBasedAI (){
 
-            CountryBasedAI.findOne({CountryBasedAI_Country_ID: Number(req.body.country_id)}
+            CountryBasedAI.findOne({CountryBasedAI_Country_ID: Number(req.body.country_id)})
          	.lean()
 			.exec(function(err, countrybasedai){
                  if (err){
