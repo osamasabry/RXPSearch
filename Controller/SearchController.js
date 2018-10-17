@@ -318,7 +318,6 @@ module.exports = {
 			} else {
 				AllData.push({AIData:ai});
 				getAllTN();
-				getTN();
 			}
 		})
 
@@ -339,6 +338,8 @@ module.exports = {
 						});
 					}
 					AllData.push({TNList:getTNData});
+					getTN();
+
 					// res.send(AllData);
 				}
 			})
@@ -382,7 +383,6 @@ module.exports = {
              } else {
                  AllData.push({AIData:ai});
                  getCountryBasedAI();
-                 getTN();
              }
         })
 
@@ -398,6 +398,8 @@ module.exports = {
                      });
                  } else {
                      AllData.push({CountryBasedAIData:countrybasedai});
+                	 getTN();
+
                  }
              })
         }
@@ -441,9 +443,6 @@ module.exports = {
              } else {
                  AllData.push({AIData:ai});
                  getCountryBasedAI();
-                 getCountryBasedTN();
-                 getAllTN();
-                 getTN();
              }
         })
 
@@ -456,7 +455,9 @@ module.exports = {
                          message: err
                      });
                  } else {
-                     AllData.push({CountryBasedAIData:countrybasedai});
+                    AllData.push({CountryBasedAIData:countrybasedai});
+                 	getCountryBasedTN();
+
                  }
             })
         }
@@ -472,7 +473,9 @@ module.exports = {
                          message: err
                      });
                  } else {
-                     AllData.push({CountryBasedTNData:countrybasedtn});
+                    AllData.push({CountryBasedTNData:countrybasedtn});
+                 	getTN();
+
                  }
             })
         }
@@ -486,7 +489,9 @@ module.exports = {
                          message: err
                      });
                  } else {
-                     AllData.push({TNData:tn});
+                    AllData.push({TNData:tn});
+                 	getAllTN();
+
                      // res.send(AllData);
                  }
              })
