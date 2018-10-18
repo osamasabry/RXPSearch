@@ -481,7 +481,15 @@ module.exports = {
         }
 
         function getTN(){
-             TN.find({TN_Code:req.body.TN_Code})
+			 TN.find({TN_Code:req.body.TN_Code})
+			 	.populate({ path: 'form', select: 'Form_Name' })
+				.populate({ path: 'route', select: 'Route_Name' })
+				.populate({ path: 'strength', select: 'StrengthUnit_Name' })
+				.populate({ path: 'weight', select: 'WeightUnit_Name' })
+				.populate({ path: 'volume', select: 'VolumeUnit_Name' })
+				.populate({ path: 'concentration', select: 'ConcentrationUnit_Name' })
+				.populate({ path: 'country', select: 'Country_Name Country_Tcode' })
+				.populate({ path: 'ai', select: 'AI_Name' })
                 .lean()
                 .exec(function(err, tn) {
                  if (err){
