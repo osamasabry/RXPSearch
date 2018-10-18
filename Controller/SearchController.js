@@ -3,8 +3,8 @@ var TN = require('../Model/TN');
 var CountryBasedAI = require('../Model/country_based_AI');
 var CountryBasedTN = require('../Model/country_based_TN');
 
-var Country = require('../Model/countries');
-var Pharmaceutical_category = require('../Model/lut_pharmaceutical_categories');
+var Country 				   = require('../Model/countries');
+var Pharmaceutical_category    = require('../Model/lut_pharmaceutical_categories');
 var Forms                      = require('../Model/lut_form');
 var Routes                     = require('../Model/lut_route');
 var Concentration              = require('../Model/lut_concentration');
@@ -26,7 +26,6 @@ var DataBySearch = [];
 
 module.exports = {
 	SearchByName:function(req,res){
-		//var Searchquery = req.body.search;
 		 AI.aggregate([
 			{ "$project": {
 				"_id": 0,
@@ -67,58 +66,6 @@ module.exports = {
 		}
 	},
 
-	// getAllData:function(req,res){
-
-	// 	AI.findOne({AI_Code: Number(req.body.AI_Code)},function(err, ai){
-	// 		if (err){
-	// 			res.send({
-	// 				message: err
-	// 			});
-	// 		} else {
-	// 			AllData.push({AIData:ai});
-
-	// 			getCountryBasedAI();
-
-	// 			getTN();
-
-	// 		}
-	// 	})
-
-	// 	function getCountryBasedAI (){
-
-	// 		CountryBasedAI.findOne({CountryBasedAI_AI_Code: Number(req.body.AI_Code)},function(err, countrybasedai){
-	// 			if (err){
-	// 				res.send({
-	// 					message: err
-	// 				});
-	// 			} else {
-	// 				AllData.push({CountryBasedAIData:countrybasedai});
-	// 			}
-	// 		})
-	// 	}
-
-	// 	function getTN(){
-	// 		TN.find({TN_ActiveIngredients:{$in:[req.body.AI_Code]}})
-	// 			.select('TN_Code TN_Name')
-	// 			.exec(function(err, tn) {
-	// 			if (err){
-	// 				return res.send({
-	// 					message: err
-	// 				});
-	// 			} else {
-	// 				for (var i = 0; i < tn.length; i++) {
-	// 					getTNData.push({
-	// 						key: tn[i].TN_Code,
-	// 						value: tn[i].TN_Name,
-	// 					});
-	// 				}
-	// 				AllData.push({TNData:getTNData});
-	// 				res.send(AllData);
-	// 			}
-	// 		})
-	// 	}
-
-	// },
 
 	getSingleTN:function(req,res){
 
