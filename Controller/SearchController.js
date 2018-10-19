@@ -396,7 +396,16 @@ module.exports = {
         function getCountryBasedAI (){
         	 
             CountryBasedAI.findOne({ $and:[ {'CountryBasedAI_Country_ID':Number(req.body.country_id), 
-				'CountryBasedAI_AI_Code':Number(search)}]},function(err, countrybasedai){
+				'CountryBasedAI_AI_Code':Number(search)}]})
+            	.populate({ path: 'CountryBasedAICountry', select: 'Country_Name' })
+            	.populate({ path: 'CountryBasedAIDosingUsageAge', select: 'UsageAge_Name' })
+				.populate({ path: 'CountryBasedAIDosingMedicalCondition'})
+				.populate({ path: 'CountryBasedAIDosingUsageDoseType', select: 'UsageDoseType_Name' })
+				.populate({ path: 'CountryBasedAIDosingUsageDoseUnit', select: 'UsageDoseUnit_Name' })
+				.populate({ path: 'CountryBasedAIDosingUsageRoute', select: 'Route_Name' })
+				.populate({ path: 'CountryBasedAIDosingUsageForm', select: 'Form_Name' })
+				.populate({ path: 'CountryBasedAIDosingUsageFrequenIntervalUnit', select: 'UsageFrequenIntervalUnit_Name' })
+            	.exec(function(err, countrybasedai){
                  if (err){
                      res.send({
                          message: err

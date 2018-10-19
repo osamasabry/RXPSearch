@@ -41,6 +41,57 @@ rxp_CountryBasedAISchema.virtual('CountryBasedAICountry', {
 });
 
 
+rxp_CountryBasedAISchema.virtual('CountryBasedAIDosingUsageAge', {
+    ref: 'rxp_lut_usage_age',
+    localField: 'CountryBasedAI_Dosing.Dosing_UsageAge_Code',
+    foreignField: 'UsageAge_Code',
+    justOne: false // for many-to-1 relationships
+
+});
+rxp_CountryBasedAISchema.virtual('CountryBasedAIDosingMedicalCondition', {
+    ref: 'rxp_lut_medical_condition',
+    localField: 'CountryBasedAI_Dosing.Dosing_MedicalCondition_Code',
+    foreignField: 'MedicalCondition_Code',
+    justOne: false // for many-to-1 relationships
+
+});
+rxp_CountryBasedAISchema.virtual('CountryBasedAIDosingUsageDoseType', {
+    ref: 'rxp_lut_usage_dose_type',
+    localField: 'CountryBasedAI_Dosing.Dosing_UsageDoseType_Code',
+    foreignField: 'UsageDoseType_Code',
+    justOne: false // for many-to-1 relationships
+
+});
+rxp_CountryBasedAISchema.virtual('CountryBasedAIDosingUsageDoseUnit', {
+    ref: 'rxp_lut_usage_dose_unit',
+    localField: 'CountryBasedAI_Dosing.Dosing_UsageDoseUnit_Code',
+    foreignField: 'UsageDoseUnit_Code',
+    justOne: false // for many-to-1 relationships
+
+});
+rxp_CountryBasedAISchema.virtual('CountryBasedAIDosingUsageRoute', {
+    ref: 'rxp_lut_route',
+    localField: 'CountryBasedAI_Dosing.Dosing_Route_Code',
+    foreignField: 'Route_Code',
+    justOne: false // for many-to-1 relationships
+
+});
+rxp_CountryBasedAISchema.virtual('CountryBasedAIDosingUsageForm', {
+    ref: 'rxp_lut_form',
+    localField: 'CountryBasedAI_Dosing.Dosing_Form_Code',
+    foreignField: 'Form_Code',
+    justOne: false // for many-to-1 relationships
+
+});
+rxp_CountryBasedAISchema.virtual('CountryBasedAIDosingUsageFrequenIntervalUnit', {
+    ref: 'rxp_lut_usage_frequency_interval_unit',
+    localField: 'CountryBasedAI_Dosing.Dosing_UsageFrequenIntervalUnit_Code',
+    foreignField: 'UsageFrequenIntervalUnit_Code',
+    justOne: false // for many-to-1 relationships
+
+});
+
+
 var CountryBasedAI_table = module.exports = mongoose.model('rxp_country_based_ai', rxp_CountryBasedAISchema);
 
 
