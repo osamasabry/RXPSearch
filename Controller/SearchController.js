@@ -427,7 +427,7 @@ module.exports = {
             })
         }
 
-        function getTN(){ //fgf
+        function getTN(){ 
 			 TN.find({TN_Code:req.body.TN_Code})
 			 	.populate({ path: 'form', select: 'Form_Name' })
 				.populate({ path: 'route', select: 'Route_Name' })
