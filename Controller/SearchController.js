@@ -11,6 +11,14 @@ var Concentration              = require('../Model/lut_concentration');
 var StrengthUnits              = require('../Model/lut_strength_units');
 var WeightUnits                = require('../Model/lut_weight_units');
 var VolumeUnits                = require('../Model/lut_volume_units');
+var Forms                      = require('../Model/lut_form');
+var Routes                     = require('../Model/lut_route');
+var UsageDoseUnit              = require('../Model/lut_usage_dose_unit');
+var UsageDoseDuration          = require('../Model/lut_usage_dose_duration_unit');
+var UsageDoseType              = require('../Model/lut_usage_dose_types');
+var UsageFrequenInterval       = require('../Model/lut_usage_frequency_interval_unit');
+var UsageAge      			   = require('../Model/lut_usage_age');
+var MedicalCondition           = require('../Model/lut_medical_condition');
 
 
 
