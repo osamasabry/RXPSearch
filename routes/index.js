@@ -5,6 +5,7 @@ var user = require('../Controller/userController');
 
 var account = require('../Controller/accountController');
 var SearchCTRL = require('../Controller/SearchController');
+var CheckDataSearchController = require('../Controller/checkDataBySearch');
 
 
 
@@ -65,7 +66,7 @@ router.post('/findData', type,function(req, res) {
         else if(req.body.type=='TN')
           await (SearchCTRL.checkDataTN(req,res));
         else
-          await (SearchCTRL.checkDataBySearch(req,res));
+          await (CheckDataSearchController.checkDataBySearch(req,res));
     });
     findData();
 });

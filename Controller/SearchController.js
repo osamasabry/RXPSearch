@@ -184,38 +184,38 @@ module.exports = {
 		}
 	},
 
-	checkDataBySearch:function(req,res){
-		var Searchquery = req.body.search;
-		AI.find({AI_Name:{$regex:Searchquery}})
-		.select('AI_Code AI_Name')
-		.exec(function(err, ai) {
-			if (err){
-				return response.send({
-					user : request.user ,
-					message: err
-				});
-			}else {
-				DataBySearch.push(ai);
-				getTNData()
-			}
+	// checkDataBySearch:function(req,res){
+	// 	var Searchquery = req.body.search;
+	// 	AI.find({AI_Name:{$regex:Searchquery}})
+	// 	.select('AI_Code AI_Name')
+	// 	.exec(function(err, ai) {
+	// 		if (err){
+	// 			return response.send({
+	// 				user : request.user ,
+	// 				message: err
+	// 			});
+	// 		}else {
+	// 			DataBySearch.push(ai);
+	// 			getTNData()
+	// 		}
 
-			function getTNData(){
-				TN.find({TN_Name:{$regex:Searchquery}})
-				.select('TN_Code TN_Name')
-				.exec(function(err, tn) {
-					if (err){
-						return response.send({
-							user : request.user ,
-							message: err
-						});
-					}else {
-						DataBySearch.push(tn);
-					}
-					res.send(DataBySearch);
-				})
-			}
-		})
-	},
+	// 		function getTNData(){
+	// 			TN.find({TN_Name:{$regex:Searchquery}})
+	// 			.select('TN_Code TN_Name')
+	// 			.exec(function(err, tn) {
+	// 				if (err){
+	// 					return response.send({
+	// 						user : request.user ,
+	// 						message: err
+	// 					});
+	// 				}else {
+	// 					DataBySearch.push(tn);
+	// 				}
+	// 				res.send(DataBySearch);
+	// 			})
+	// 		}
+	// 	})
+	// },
 
 	getDataAI:function(req,res){
 		AllData=[];
@@ -256,6 +256,7 @@ module.exports = {
 			})
 		}
 	},
+	
 	getDataTN:function(req,res){
 		AllData=[];
 		TNData=[];
@@ -345,8 +346,17 @@ module.exports = {
 
             CountryBasedAI.findOne({  $and:[ {'CountryBasedAI_Country_ID':Number(req.body.country_id), 
 				'CountryBasedAI_AI_Code':Number(req.body.AI_Code)} ]})
-         	.lean()
-			.exec(function(err, countrybasedai){
+	         	.lean()
+	         	.populate({ path: 'CountryBasedAICountry', select: 'Country_Name' })
+            	.populate({ path: 'CountryBasedAIDosingUsageAge', select: 'UsageAge_Name' })
+				.populate({ path: 'CountryBasedAIDosingMedicalCondition'})
+				.populate({ path: 'CountryBasedAIDosingUsageDoseType', select: 'UsageDoseType_Name' })
+				.populate({ path: 'CountryBasedAIDosingUsageDoseUnit', select: 'UsageDoseUnit_Name' })
+				.populate({ path: 'CountryBasedAIDosingUsageRoute', select: 'Route_Name' })
+				.populate({ path: 'CountryBasedAIDosingUsageForm', select: 'Form_Name' })
+				.populate({ path: 'CountryBasedAIDosingUsageFrequenIntervalUnit', select: 'UsageFrequenIntervalUnit_Name' })
+            	.exec(function(err, countrybasedai){
+			
                  if (err){
                      res.send({
                          message: err
@@ -490,7 +500,6 @@ module.exports = {
                  }
              })
         }
-
     },
 
 }
