@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-// var bcrypt   = require('bcrypt-nodejs');
+var bcrypt   = require('bcrypt-nodejs');
 
 var RxP_LUT_Field_Structure_DataTypes_Schema = mongoose.Schema({
     

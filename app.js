@@ -20,7 +20,9 @@ require('./config/passport')(passport);
 
 var app = express();
 app.use(cors({credentials: true, origin: true}))
-db.connect(process.env.rxpProductionDBConnection,{useNewUrlParser: true});
+// db.connect(process.env.rxpProductionDBConnection,{useNewUrlParser: true});
+
+db.connect("mongodb://webappdba:Ma13579@35.204.1.127:27017/RxPediaDB"); 
 
 // view engine setup
 app.use(express.static(path.join(__dirname, 'public')));

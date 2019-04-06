@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-// var bcrypt   = require('bcrypt-nodejs');
+var bcrypt   = require('bcrypt-nodejs');
 
 var rxp_TNHistoryTableSchema = mongoose.Schema({
     
@@ -9,8 +9,8 @@ var rxp_TNHistoryTableSchema = mongoose.Schema({
     TNHistory_Status                         :Number,
     TNHistory_Form_ID                        :Number,
     TNHistory_Route_ID                       :Number,
-    TNHistory_Strength_Unit_ID               :Number,
-    TNHistory_Strength_Value                 :String,
+    // TNHistory_Strength_Unit_ID               :Number,
+    // TNHistory_Strength_Value                 :String,
     TNHistory_Weight_Unit_ID                 :Number,
     TNHistory_Weight_Value                   :String,
     TNHistory_Volume_Unit_ID                 :Number,
@@ -18,7 +18,18 @@ var rxp_TNHistoryTableSchema = mongoose.Schema({
     TNHistory_Concentration_Unit_ID          :Number,
     TNHistory_Concentration_Value            :String,
     TNHistory_Country_ID                     :[Number],
+    
+    TNHistory_Country_Data                   :[{
+        TN_Data_Country_ID                :Number,
+        TN_Data_Country_FullName          :String,
+        TN_Data_Country_LocalLanguageName :String,
+    }],
 
+    TNHistory_Data_Strength                  :[{
+        TN_Data_Strength_AI_ID   :Number,
+        TN_Data_Strength_Value   :String,
+        TN_Data_Strength_Unite_ID:Number
+    }],
     TNHistory_AssiendToEditor_Employee_ID    :Number,
     TNHistory_EditStatus                     :Number,
     TNHistory_EditDate_Start                 :Date,

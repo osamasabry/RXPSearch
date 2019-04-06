@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var customer = require('../Controller/customerController');
-var user = require('../Controller/userController');
 
-var account = require('../Controller/accountController');
+
+// var Account = require('../Controller/accountController');
 var SearchCTRL = require('../Controller/SearchController');
 var CheckDataSearchController = require('../Controller/checkDataBySearch');
 

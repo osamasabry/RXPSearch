@@ -1,25 +1,22 @@
 var mongoose = require('mongoose');
-// var bcrypt   = require('bcrypt-nodejs');
+var bcrypt   = require('bcrypt-nodejs');
 
 var rxp_CountryBasedTNSchema = mongoose.Schema({
     
     CountryBasedTN_Code                            :Number,
-	CountryBasedTN_Price     	  				   :String,
+	CountryBasedTN_UnitPrice     	  			   :String,
     CountryBasedTN_Images                          :[String],
-    CountryBasedTN_TN_Code                         :Number,
+    CountryBasedTN_Currency 					   :Number,
+	CountryBasedTN_Manufacturer 				   :String,
+	CountryBasedTN_Status 						   :Number,
+	CountryBasedTN_IsRegistered  				   :Number,
+	CountryBasedTN_Registration_Number 			   :String,
+	CountryBasedTN_Origin 						   :String,
+	CountryBasedTN_Licensor_Name 				   :String,
+	CountryBasedTN_TN_Code                         :Number,
     CountryBasedTN_Country_ID                      :Number,
-    
-},{
-    toObject: { virtuals: true }
 });
 
-rxp_CountryBasedTNSchema.virtual('CountryBasedTNCountry', {
-    ref: 'rxp_countries',
-    localField: 'CountryBasedTN_Country_ID',
-    foreignField: 'Country_Code',
-    justOne: true // for many-to-1 relationships
-
-});
 
 var CountryBasedTN_table = module.exports = mongoose.model('rxp_country_based_tn', rxp_CountryBasedTNSchema);
 

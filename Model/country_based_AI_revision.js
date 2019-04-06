@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
-// var bcrypt   = require('bcrypt-nodejs');
+var bcrypt   = require('bcrypt-nodejs');
 
 var rxp_CountryBasedAIRevisionSchema = mongoose.Schema({
     
-    CountryBasedAIRevision_Code                            :Number,
+    CountryBasedAIRevision_Code                    :Number,
+    CountryBasedAIRevision_Alert                   :String,
 	CountryBasedAIRevision_Dosing     	  				   :[{
         Dosing_UsageAge_Code                       : Number,
         Dosing_MedicalCondition_Code               : Number,
@@ -19,43 +20,49 @@ var rxp_CountryBasedAIRevisionSchema = mongoose.Schema({
     },{
         toObject: { virtuals: true }
     }],
-    CountryBasedAIRevision_UsaageLabeledIndications 	   :String,
-    CountryBasedAIRevision_UsaageOffLabeledIndications 	   :String,
-    CountryBasedAIRevision_Administration  				   :String,
-    CountryBasedAIRevision_DietaryConsiderations		   :String,
-    CountryBasedAIRevision_PreparationForAdministration    :String,
-    CountryBasedAIRevision_PregnancyConsideration		   :String,
-    CountryBasedAIRevision_Storage			               :String,
-    CountryBasedAIRevision_Stability					   :String,
-    CountryBasedAIRevision_AI_Code                         :Number,
-    CountryBasedAIRevision_Country_ID                      :Number,
-    CountryBasedAIRevision_CountryBasedAI_Code             :Number,
+    CountryBasedAIRevision_UsaageLabeledIndications 	        :String,
+    CountryBasedAIRevision_UsaageOffLabeledIndications 	        :String,
+    CountryBasedAIRevision_Administration_IV  				    :String,
+    CountryBasedAIRevision_Administration_Injectable_Detail     :String,
+    CountryBasedAIRevision_Administration_Oral                  :String,
+    CountryBasedAIRevision_Administration_Rectal                :String,
+    CountryBasedAIRevision_Compatibility                        :String,
+    CountryBasedAIRevision_DietaryConsiderations		        :String,
+    CountryBasedAIRevision_PreparationForAdministration         :String,
+    CountryBasedAIRevision_PregnancyConsideration		        :String,
+    CountryBasedAIRevision_Storage_Stability			        :String,
+    CountryBasedAIRevision_AI_Code                              :Number,
+    CountryBasedAIRevision_Country_ID                           :Number,
+    CountryBasedAIRevision_CountryBasedAI_Code                  :Number,
+
+    CountryBasedAIRevision_Log:[{
+        CountryBasedAIRevision_Log_Action         :String,
+        CountryBasedAIRevision_Log_Date           :Date,
+        CountryBasedAIRevision_Log_Employee_ID    :Number,
+        CountryBasedAIRevision_Log_Type           :String,
+    }],
 
     CountryBasedAIRevision_AssiendToEditor_Employee_ID    :Number,
     CountryBasedAIRevision_EditStatus                     :Number,
-    CountryBasedAIRevision_EditDate_Start                 :Date,
     CountryBasedAIRevision_EditedBy_Employee_ID           :Number,
-    CountryBasedAIRevision_EditDate_Close                 :Date,
-    
     CountryBasedAIRevision_AssiendToReviewer_Employee_ID  :Number,
     CountryBasedAIRevision_ReviewStatus                   :Number,
-    CountryBasedAIRevision_ReviewDate_Start               :Date,
     CountryBasedAIRevision_ReviewedBy_Employee_ID         :Number,
-    CountryBasedAIRevision_ReviewDate_Close               :Date,
-    
     CountryBasedAIRevision_AssiendToGrammer_Employee_ID   :Number,
     CountryBasedAIRevision_GrammerStatus                  :Number,
-    CountryBasedAIRevision_GrammerReview_Date_Start       :Date,
     CountryBasedAIRevision_GrammerReviewBy_Employee_ID    :Number,
-    CountryBasedAIRevision_GrammerReview_Date_Close       :Date,
-    
     CountryBasedAIRevision_AssiendToPublisher_Employee_ID :Number,
     CountryBasedAIRevision_PublishStatus                  :Number,
-    CountryBasedAIRevision_PublishDate_Start              :Date,
     CountryBasedAIRevision_Publishedby_Employee_ID        :Number,
-    CountryBasedAIRevision_PublishDate_Close              :Date,
-    
     CountryBasedAIRevision_RevisionCode                   :Number,
+    CountryBasedAIRevision_Comments                       :[{
+        CountryBasedAIRevision_Comments_Employee_ID       : Number,
+        CountryBasedAIRevision_Comments_ToEmployee_ID     : Number,
+        CountryBasedAIRevision_Comments_Message           : String,
+        CountryBasedAIRevision_Comments_Date              : Date,
+        CountryBasedAIRevision_Comments_SenderRoleType    : String
+    }],
+
     
 },{
     toObject: { virtuals: true }

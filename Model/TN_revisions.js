@@ -1,16 +1,17 @@
 var mongoose = require('mongoose');
-// var bcrypt   = require('bcrypt-nodejs');
+var bcrypt   = require('bcrypt-nodejs');
 
 var rxp_TNRevisionTableSchema = mongoose.Schema({
     
     TNRevision_Code                           :Number,
     TNRevision_Name                           :String,
     TNRevision_ActiveIngredients              :[Number],
+    TNRevision_ActualActiveIngredients        :[Number],
     TNRevision_Status                         :Number,
     TNRevision_Form_ID                        :Number,
     TNRevision_Route_ID                       :Number,
-    TNRevision_Strength_Unit_ID               :Number,
-    TNRevision_Strength_Value                 :String,
+    // TNRevision_Strength_Unit_ID               :Number,
+    // TNRevision_Strength_Value                 :String,
     TNRevision_Weight_Unit_ID                 :Number,
     TNRevision_Weight_Value                   :String,
     TNRevision_Volume_Unit_ID                 :Number,
@@ -18,6 +19,17 @@ var rxp_TNRevisionTableSchema = mongoose.Schema({
     TNRevision_Concentration_Unit_ID          :Number,
     TNRevision_Concentration_Value            :String,
     TNRevision_Country_ID                     :[Number],
+    TNRevision_Country_Data                   :[{
+        TN_Data_Country_ID                  :Number,
+        TN_Data_Country_FullName            :String,
+        TN_Data_Country_LocalLanguageName   :String,
+    }],
+
+    TNRevision_Data_Strength                  :[{
+        TN_Data_Strength_AI_ID   :Number,
+        TN_Data_Strength_Value   :String,
+        TN_Data_Strength_Unite_ID:Number
+    }],
 
     TNRevision_AssiendToEditor_Employee_ID    :Number,
     TNRevision_EditStatus                     :Number,

@@ -1,16 +1,17 @@
 var mongoose = require('mongoose');
-// var bcrypt   = require('bcrypt-nodejs');
+var bcrypt   = require('bcrypt-nodejs');
 
 var rxp_TNTableSchema = mongoose.Schema({
     
 	TN_Code     	  				 :Number,
     TN_Name     	 				 :String,
     TN_ActiveIngredients 			 :[Number],
+    TN_ActualActiveIngredients 		 :[Number],
     TN_Status 						 :Number,
     TN_Form_ID  					 :Number,
     TN_Route_ID						 :Number,
-    TN_Strength_Unit_ID 			 :Number,
-    TN_Strength_Value				 :String,
+    // TN_Strength_Unit_ID 			 :Number,
+    // TN_Strength_Value				 :String,
     TN_Weight_Unit_ID			     :Number,
     TN_Weight_Value					 :String,
     TN_Volume_Unit_ID				 :Number,
@@ -18,6 +19,22 @@ var rxp_TNTableSchema = mongoose.Schema({
     TN_Concentration_Unit_ID		 :Number,
     TN_Concentration_Value			 :String,
     TN_Country_ID					 :[Number],
+
+    TN_Country_Data                   :[{
+        TN_Data_Country_ID                :Number,
+        TN_Data_Country_FullName          :String,
+        TN_Data_Country_LocalLanguageName :String,
+    },{
+        toObject: { virtuals: true }
+    }],
+
+    TN_Data_Strength                  :[{
+        TN_Data_Strength_AI_ID   :Number,
+        TN_Data_Strength_Value   :String,
+        TN_Data_Strength_Unite_ID:Number
+    },{
+        toObject: { virtuals: true }
+    }],
 },{
     toObject: { virtuals: true }
 });
@@ -39,9 +56,9 @@ rxp_TNTableSchema.virtual('route',{
 
 rxp_TNTableSchema.virtual('strength',{
     ref: 'rxp_lut_strength_unit',
-    localField: 'TN_Strength_Unit_ID',
+    localField: 'TN_Data_Strength.TN_Data_Strength_Unite_ID',
     foreignField: 'StrengthUnit_Code',
-    justOne: true // for many-to-1 relationships
+    justOne: false // for many-to-1 relationships
 });
 
 rxp_TNTableSchema.virtual('weight',{
@@ -71,6 +88,14 @@ rxp_TNTableSchema.virtual('country',{
     foreignField: 'Country_Code',
     justOne: false // for many-to-1 relationships
 });
+
+rxp_TNTableSchema.virtual('ActualAI',{
+    ref: 'rxp_ai',
+    localField: 'TN_ActualActiveIngredients',
+    foreignField: 'AI_Code',
+    justOne: false // for many-to-1 relationships
+});
+
 
 
 rxp_TNTableSchema.virtual('ai',{
