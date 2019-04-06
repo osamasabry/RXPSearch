@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 
-var toolSchema = mongoose.Schema({
+var ToolSchema = mongoose.Schema({
     
-	code     : String,
-    name     : String
-    
+	Tool_Code     		: Number,
+    Tool_Name     		: String,
+    Tool_IsActive     	: Number,
+    Tool_Description    : String,
 });
 
 
-module.exports = mongoose.model('rxp_outsource_tools', toolSchema);
+module.exports = mongoose.model('rxp_extra_tool', ToolSchema);

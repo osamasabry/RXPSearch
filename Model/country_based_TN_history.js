@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
 
 var rxp_CountryBasedTNHistorySchema = mongoose.Schema({
     

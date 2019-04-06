@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
 
 var rxp_EmployeeRoleSchema = mongoose.Schema({
     
@@ -15,9 +14,23 @@ var rxp_EmployeeRoleSchema = mongoose.Schema({
     Employee_Role_UnAssignedBy_Employee_Code :Number,
     Employee_Role_Sub_Role_Type              :Number,
     Employee_Role_UnAssignedDate 			 :Date
+}, {
+    toObject: { virtuals: true }
 });
 
+rxp_EmployeeRoleSchema.virtual('AssignEmployee',{
+    ref: 'rxp_employees',
+    localField: 'Employee_Role_AssignedBy_Employee_Code',
+    foreignField: 'Employee_Code',
+    justOne: false // for many-to-1 relationships
+});
 
+rxp_EmployeeRoleSchema.virtual('UnAssignEmployee',{
+    ref: 'rxp_employees',
+    localField: 'Employee_Role_UnAssignedBy_Employee_Code',
+    foreignField: 'Employee_Code',
+    justOne: false // for many-to-1 relationships
+});
 
 rxp_EmployeeRoleSchema.methods.unAssignRole = function(by_user_id) {
 

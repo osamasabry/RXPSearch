@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
 
 var rxpEmployeeSchema = mongoose.Schema({
     
@@ -13,14 +12,27 @@ var rxpEmployeeSchema = mongoose.Schema({
 	Employee_Telephone       	:String,
 	Employee_DateOfBirth   		:Date,
 	Employee_Graduation_Year   	:String,
-	Employee_Department_ID   	:Number , 
-	Employee_Senior_Employee_ID :Number , 
+	Employee_Department_ID   	:Number, 
+	Employee_Senior_Employee_ID :Number, 
 	Employee_Note 				:String
 }, {
     toObject: { virtuals: true }
 });
 
+rxpEmployeeSchema.virtual('Department', {
+	ref: 'rxp_department',
+	localField: 'Employee_Department_ID',
+	foreignField: 'Department_Code',
+	justOne: true // for many-to-1 relationships
+ });
 
+
+rxpEmployeeSchema.virtual('Country',{
+    ref: 'rxp_countries',
+    localField: 'Employee_Country',
+    foreignField: 'Country_Code',
+    justOne: false // for many-to-1 relationships
+});
 
 
 var Employee = module.exports = mongoose.model('rxp_employees', rxpEmployeeSchema);
@@ -29,10 +41,8 @@ module.exports.getLastCode = function(callback){
     
     Employee.findOne({},callback).sort({Employee_Code:-1});
 }
-rxpEmployeeSchema.virtual('User', {
-	ref: 'rxp_users',
-	localField: 'Employee_Code',
-	foreignField: 'User_Employee_ID',
-	justOne: true // for many-to-1 relationships
-  });
+
+
+
+
 
