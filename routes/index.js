@@ -84,5 +84,11 @@ router.post('/displayData', type,function(req, res) {
     findData();
 });
 
+router.post('/getAIByMedicalCondition', type,function(req, res) {
+      var GetAIByMedicalCondition = async (function (){
+        await (SearchCTRL.getAIByMedicalCondition(req,res));
+    });
+    getAIByMedicalCondition();
+});
 
 module.exports = router;

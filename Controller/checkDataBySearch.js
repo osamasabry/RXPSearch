@@ -1,5 +1,6 @@
-var AI = require('../Model/AI');
-var TN = require('../Model/TN');
+var AI 				 = require('../Model/AI');
+var TN 				 = require('../Model/TN');
+var MedicalCondition = require('../Model/lut_medical_condition');
 
 var DataBySearch = [];
 
@@ -13,8 +14,8 @@ module.exports = {
 			// .select('AI_Code AI_Name')
 			.exec(function(err, ATC_Code) {
 				if (err){
-					return response.send({
-						user : request.user ,
+					return res.send({
+						// user : request.user ,
 						message: err
 					});
 				}else if(ATC_Code.length = 1){
@@ -29,8 +30,8 @@ module.exports = {
 				// .select('AI_Code AI_Name')
 				.exec(function(err, NDC_Code) {
 					if (err){
-						return response.send({
-							user : request.user ,
+						return res.send({
+							// user : request.user ,
 							message: err
 						});
 					}else if(NDC_Code.length = 1){
@@ -47,12 +48,28 @@ module.exports = {
 				.select('AI_Code AI_Name')
 				.exec(function(err, ai) {
 					if (err){
-						return response.send({
-							user : request.user ,
+						return res.send({
+							// user : request.user ,
 							message: err
 						});
 					}else {
 						DataBySearch.push(ai);
+						getMedicaCondition()
+					}
+				})
+			}
+
+			function getMedicaCondition(){
+				MedicalCondition.find({MedicalCondition_Name:{$regex:Searchquery}})
+				.select('MedicalCondition_Code MedicalCondition_Name')
+				.exec(function(err, medicalCon) {
+					if (err){
+						return res.send({
+							// user : request.user ,
+							message: err
+						});
+					}else {
+						DataBySearch.push(medicalCon);
 						getTNData()
 					}
 				})
@@ -65,8 +82,8 @@ module.exports = {
 				.select('TN_Code TN_Name')
 				.exec(function(err, tn) {
 					if (err){
-						return response.send({
-							user : request.user ,
+						return res.send({
+							// user : request.user ,
 							message: err
 						});
 					}else {

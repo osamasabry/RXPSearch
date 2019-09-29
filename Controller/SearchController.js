@@ -34,7 +34,7 @@ var DataBySearch = [];
 
 module.exports = {
 	SearchByName:function(req,res){
-		 AI.aggregate([
+		AI.aggregate([
 			{ "$project": {
 				"_id": 0,
 				"key": "$AI_Code",
@@ -51,6 +51,7 @@ module.exports = {
 					findTN();
 				}
 		})
+
 		function findTN(){
 			TN.aggregate([
 				{ "$project": {
@@ -68,12 +69,33 @@ module.exports = {
 					});
 				} else {
 					Data = Object.assign(Data, tn);
+					MedicalCondition();
+					// res.send(Data);
+				}
+			})
+		}
+
+		function MedicalCondition(){
+			MedicalCondition.aggregate([
+				{ "$project": {
+					"_id": 0,
+					"key": "$MedicalCondition_Code",
+					"value": "$MedicalCondition_Name",
+					"type": "MedicalCondition",
+				}
+			}]).exec(function(err, medicalCon) {
+
+				if (err){
+					return res.send({
+					message: err
+					});
+				} else {
+					Data = Object.assign(Data, medicalCon);
 					res.send(Data);
 				}
 			})
 		}
 	},
-
 
 	getSingleTN:function(req,res){
 
@@ -184,38 +206,21 @@ module.exports = {
 		}
 	},
 
-	// checkDataBySearch:function(req,res){
-	// 	var Searchquery = req.body.search;
-	// 	AI.find({AI_Name:{$regex:Searchquery}})
-	// 	.select('AI_Code AI_Name')
-	// 	.exec(function(err, ai) {
-	// 		if (err){
-	// 			return response.send({
-	// 				user : request.user ,
-	// 				message: err
-	// 			});
-	// 		}else {
-	// 			DataBySearch.push(ai);
-	// 			getTNData()
-	// 		}
-
-	// 		function getTNData(){
-	// 			TN.find({TN_Name:{$regex:Searchquery}})
-	// 			.select('TN_Code TN_Name')
-	// 			.exec(function(err, tn) {
-	// 				if (err){
-	// 					return response.send({
-	// 						user : request.user ,
-	// 						message: err
-	// 					});
-	// 				}else {
-	// 					DataBySearch.push(tn);
-	// 				}
-	// 				res.send(DataBySearch);
-	// 			})
-	// 		}
-	// 	})
-	// },
+	getAIByMedicalCondition:function(req,res){
+		var Searchquery = req.body.search;
+		AI.find({'AI_Dosing.Dosing_MedicalCondition_Code' :  Number(Searchquery)})
+			.select('AI_Code AI_Name')
+			.lean()
+			.exec(function(err, ai){
+			if (err){
+				res.send({
+					message: err
+				});
+			} else {
+				res.send(ai);
+			}
+		})
+	},
 
 	getDataAI:function(req,res){
 		AllData=[];
