@@ -35,6 +35,7 @@ router.post('/login', type,function(req, res, next) {
 
 
 router.post('/searchAIandTN', type,function(req, res) {
+      console.log('ooooooooo')
       var Search = async (function (){
         await (SearchCTRL.SearchByName(req,res));
     });
