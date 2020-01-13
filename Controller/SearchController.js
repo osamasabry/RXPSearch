@@ -69,13 +69,13 @@ module.exports = {
 					});
 				} else {
 					Data = Object.assign(Data, tn);
-					MedicalCondition();
+					getMedicalCondition();
 					// res.send(Data);
 				}
 			})
 		}
 
-		function MedicalCondition(){
+		function getMedicalCondition(){
 			MedicalCondition.aggregate([
 				{ "$project": {
 					"_id": 0,
