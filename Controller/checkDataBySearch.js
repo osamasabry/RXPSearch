@@ -10,7 +10,9 @@ module.exports = {
 	checkDataBySearch:function(req,res){
 		var Searchquery = req.body.search;
 
-		AI.find({AI_ATC_Code:{$regex:Searchquery}})
+		// AI.find({AI_ATC_Code:{$regex:Searchquery}})
+		AI.find({$and:[ {AI_ATC_Code:{$regex:Searchquery}}, 
+				{$or: [ { 'AI_Status': 1 },{ 'AI_Status': 2 }]}]})
 			// .select('AI_Code AI_Name')
 			.exec(function(err, ATC_Code) {
 				if (err){
@@ -26,7 +28,9 @@ module.exports = {
 				}
 
 			function getNDCCode(){
-				AI.find({AI_NDC_Code:{$regex:Searchquery}})
+				// AI.find({AI_NDC_Code:{$regex:Searchquery}})
+				AI.find({$and:[ {AI_NDC_Code:{$regex:Searchquery}}, 
+				{$or: [ { 'AI_Status': 1 },{ 'AI_Status': 2 }]}]})
 				// .select('AI_Code AI_Name')
 				.exec(function(err, NDC_Code) {
 					if (err){
@@ -44,7 +48,9 @@ module.exports = {
 			}
 
 			function getAIData(){
-				AI.find({AI_Name:{$regex:Searchquery}})
+				// AI.find({AI_Name:{$regex:Searchquery}})
+				AI.find({$and:[ {AI_Name:{$regex:Searchquery}}, 
+				{$or: [ { 'AI_Status': 1 },{ 'AI_Status': 2 }]}]})
 				.select('AI_Code AI_Name')
 				.exec(function(err, ai) {
 					if (err){

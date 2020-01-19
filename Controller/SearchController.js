@@ -128,7 +128,9 @@ module.exports = {
 
 	checkDataAI:function(req,res){
 		FindData =[];
-		AI.findOne({AI_Code: Number(req.body.AI_Code)},function(err, ai){
+		AI.findOne({$and:[ {'AI_Code':Number(req.body.AI_Code)}, 
+				{$or: [ { 'AI_Status': 1 },{ 'AI_Status': 2 }]}]},function(err, ai){
+		// AI.findOne({AI_Code: Number(req.body.AI_Code)},function(err, ai){
 			if (err){
 				res.send({
 					message: err
