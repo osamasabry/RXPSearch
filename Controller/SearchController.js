@@ -135,10 +135,12 @@ module.exports = {
 				res.send({
 					message: err
 				});
-			} else {
-				FindData.push({AI:true});
-				CheckCountryBasedAI()
+			} else if(ai){
+				FindData.push({AI_Status:true});
+			}else{
+				FindData.push({AI_Status:false});
 			}
+			CheckCountryBasedAI();
 		})
 
 		function CheckCountryBasedAI(){
@@ -164,7 +166,6 @@ module.exports = {
 				}
 				res.send( FindData);
 			})
-
 		}
 	},
 
@@ -175,10 +176,12 @@ module.exports = {
 				res.send({
 					message: err
 				});
-			} else {
+			} else if(tn) {
 				FindData.push({tn:true});
-				CheckCountryBasedTN()
+			}else{
+				FindData.push({tn:false});
 			}
+			CheckCountryBasedTN()
 		})
 
 		function CheckCountryBasedTN(){
