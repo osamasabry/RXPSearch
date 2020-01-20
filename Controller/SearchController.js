@@ -22,7 +22,7 @@ var MedicalCondition           = require('../Model/lut_medical_condition');
 
 
 
-var Data={};
+var Data=[];
 var AllData=[];
 var getTNData=[];
 
@@ -47,7 +47,9 @@ module.exports = {
 						message: err
 					});
 				} else {
-					Data = ai;
+					// Data = ai;
+					Data = Data.concat(ai);
+					// console.log(Data);
 					findTN();
 				}
 		})
@@ -68,7 +70,8 @@ module.exports = {
 					message: err
 					});
 				} else {
-					Data = Object.assign(Data, tn);
+					Data = Data.concat(tn);
+					// Data = Object.assign(Data, tn);
 					getMedicalCondition();
 					// res.send(Data);
 				}
@@ -90,7 +93,10 @@ module.exports = {
 					message: err
 					});
 				} else {
-					Data = Object.assign(Data, medicalCon);
+					Data = Data.concat(medicalCon);
+					// Data = Object.assign(Data, medicalCon);
+					console.log(Data);
+
 					res.send(Data);
 				}
 			})
