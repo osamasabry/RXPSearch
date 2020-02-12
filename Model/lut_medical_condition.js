@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+// var bcrypt   = require('bcrypt-nodejs');
 
 var rxp_LutMedicalConditionSchema = mongoose.Schema({
 
@@ -8,6 +9,7 @@ var rxp_LutMedicalConditionSchema = mongoose.Schema({
     MedicalCondition_ICD9 		 :String,
     MedicalCondition_ICD10 		 :String,
     MedicalCondition_ICD10am 	 :String,
+    MedicalCondition_ICD10cm 	 :String,
     MedicalCondition_ICD11 		 :String,
     MedicalCondition_IsActive    :Number,
     

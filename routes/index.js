@@ -21,7 +21,7 @@ var async = require('asyncawait/async');
 var await = require('asyncawait/await');
 
 
-router.post('/login', type,function(req, res, next) {
+router.post('/Accountlogin', type,function(req, res, next) {
       passport.authenticate('login', function(err, user, info) {
         if (err) { return next(err); }
         if (!user) { return res.send(info); }

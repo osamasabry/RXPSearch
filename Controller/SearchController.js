@@ -34,6 +34,7 @@ var DataBySearch = [];
 
 module.exports = {
 	SearchByName:function(req,res){
+		Data =[];
 		AI.aggregate([
 			{ "$project": {
 				"_id": 0,
@@ -47,23 +48,28 @@ module.exports = {
 						message: err
 					});
 				} else {
-					// Data = ai;
 					Data = Data.concat(ai);
-					// console.log(Data);
 					findTN();
 				}
 		})
 
 		function findTN(){
 			TN.aggregate([
-				{ "$project": {
-					"_id": 0,
-					"key": "$TN_Code",
-					"value": "$TN_Name",
-					"type": "TN",
-					"aicode": "$TN_ActiveIngredients"
+				{ 
+				    $match: { 
+				        TN_Status: 1,
+			    	}
+				},
+				{ 
+					"$project": {
+						"_id": 0,
+						"key": "$TN_Code",
+						"value": "$TN_Name",
+						"type": "TN",
+						"aicode": "$TN_ActiveIngredients"
+					}
 				}
-			}]).exec(function(err, tn) {
+			]).exec(function(err, tn) {
 
 				if (err){
 					return res.send({
@@ -71,9 +77,8 @@ module.exports = {
 					});
 				} else {
 					Data = Data.concat(tn);
-					// Data = Object.assign(Data, tn);
-					getMedicalCondition();
-					// res.send(Data);
+					// getMedicalCondition();
+					res.send(Data);
 				}
 			})
 		}
@@ -94,9 +99,7 @@ module.exports = {
 					});
 				} else {
 					Data = Data.concat(medicalCon);
-					// Data = Object.assign(Data, medicalCon);
-					console.log(Data);
-
+					console.log(Data)
 					res.send(Data);
 				}
 			})
