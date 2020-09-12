@@ -22,7 +22,8 @@ var app = express();
 app.use(cors({credentials: true, origin: true}))
 // db.connect(process.env.rxpProductionDBConnection,{useNewUrlParser: true});
 
-db.connect("mongodb://webappdba:Ma13579@35.204.1.127:27017/RxPediaDB"); 
+// db.connect("mongodb://webappdba:Ma13579@35.204.1.127:27017/RxPediaDBDev",{useNewUrlParser: true}); 
+db.connect("mongodb://localhost:27017/Medical",{ useNewUrlParser: true });
 
 // view engine setup
 app.use(express.static(path.join(__dirname, 'public')));

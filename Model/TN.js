@@ -19,6 +19,7 @@ var rxp_TNTableSchema = mongoose.Schema({
     TN_Concentration_Value			 :String,
     TN_Country_ID					 :[Number],
 
+
     TN_Country_Data                   :[{
         TN_Data_Country_ID                :Number,
         TN_Data_Country_FullName          :String,
@@ -34,6 +35,8 @@ var rxp_TNTableSchema = mongoose.Schema({
     },{
         toObject: { virtuals: true }
     }],
+    TN_VersionCode                   :Number,
+    
 },{
     toObject: { virtuals: true }
 });
